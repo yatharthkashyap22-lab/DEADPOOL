@@ -1,15 +1,18 @@
-import java.util.Arrays;
-
 class Solution {
     public int singleNumber(int[] nums) {
-        Arrays.sort(nums);
-
-        for(int i = 0; i < nums.length-1; i+=2){
-            if(nums[i] != nums[i + 1]){
+        int n = nums.length;
+        for (int i = 0; i < n; i++) {
+            boolean found = false;
+            for (int j = 0; j < n; j++) {
+                if (i != j && nums[i] == nums[j]) {
+                    found = true;
+                    break;
+                }
+            }
+            if (!found) {
                 return nums[i];
             }
         }
-
-        return nums[nums.length - 1];
+        return -1;
     }
 }
