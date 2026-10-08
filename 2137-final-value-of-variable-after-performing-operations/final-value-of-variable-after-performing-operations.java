@@ -1,14 +1,17 @@
 class Solution {
     public int finalValueAfterOperations(String[] operations) {
 
-        int sum = 0;
+        int x = 0;
+
         for (int i = 0; i < operations.length; i++) {
+
             if (operations[i].equals("++X") || operations[i].equals("X++")) {
-                sum++;
+                x++;
             } else {
-                sum--;
+                x--;
             }
         }
-        return sum;
+
+        return x;
     }
 }
