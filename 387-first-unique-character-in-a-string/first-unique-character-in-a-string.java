@@ -1,17 +1,17 @@
-import java.util.HashMap;
-
 class Solution {
     public int firstUniqChar(String s) {
 
-        HashMap<Character, Integer> map = new HashMap<>();
+        for (int i = 0; i < s.length(); i++) {
+            boolean unique = true;
 
-        for(char ch : s.toCharArray()) {
-            map.put(ch, map.getOrDefault(ch, 0) + 1);
-        }
+            for (int j = 0; j < s.length(); j++) {
+                if (i != j && s.charAt(i) == s.charAt(j)) {
+                    unique = false;
+                    break;
+                }
+            }
 
-        for(int i = 0; i < s.length(); i++) {
-
-            if(map.get(s.charAt(i)) == 1) {
+            if (unique) {
                 return i;
             }
         }
