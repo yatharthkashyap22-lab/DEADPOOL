@@ -1,36 +1,30 @@
-import java.util.*;
+import java.util.Stack;
 
 class Solution {
-
     public boolean backspaceCompare(String s, String t) {
+        Stack<Character> stackS = buildFinalString(s);
+        Stack<Character> stackT = buildFinalString(t);
 
-        StringBuilder a = new StringBuilder();
-        StringBuilder b = new StringBuilder();
-
-        for (int i = 0; i < s.length(); i++) {
-
-            if (s.charAt(i) == '#') {
-                if (a.length() > 0) {
-                    a.deleteCharAt(a.length() - 1);
-                }
-            } 
-            else {
-                a.append(s.charAt(i));
+        while (!stackS.isEmpty() && !stackT.isEmpty()) {
+            if (stackS.pop() != stackT.pop()) {
+                return false;
             }
         }
 
-        for (int i = 0; i < t.length(); i++) {
+        return stackS.isEmpty() && stackT.isEmpty();
+    }
 
-            if (t.charAt(i) == '#') {
-                if (b.length() > 0) {
-                    b.deleteCharAt(b.length() - 1);
+    private Stack<Character> buildFinalString(String str) {
+        Stack<Character> stack = new Stack<>();
+        for (char c : str.toCharArray()) {
+            if (c == '#') {
+                if (!stack.isEmpty()) {
+                    stack.pop();
                 }
-            } 
-            else {
-                b.append(t.charAt(i));
+            } else {
+                stack.push(c);
             }
         }
-
-        return a.toString().equals(b.toString());
+        return stack;
     }
 }
